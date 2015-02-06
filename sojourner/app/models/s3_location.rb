@@ -1,6 +1,6 @@
 class S3Location < StorageLocation
 
-  DEFAULT_BUCKET_NAME = Rails.env.development? ? "com.climate.qa1.services" : "com.climate.#{Rails.env}.services"
+  DEFAULT_BUCKET_NAME = DotProperties.fetch('sojourner.default_s3_bucket_name')
   DEFAULT_PREFIX_BASE = "sojourner"
 
   def self.s3
