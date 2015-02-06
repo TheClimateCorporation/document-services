@@ -18,11 +18,17 @@ RSpec.describe DocstoreConnector, :type => :model do
       before do
         stub_request(:post, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations")
           .with(headers: {'X-Request-Id' => request_id})
-          .to_return(body: { 'document_id' => document_id }.to_json)
+          .to_return(body: { 'document_id' => document_id, enabled: true}.to_json)
       end
 
+      let(:response) { connector.create_id_reservation }
+
       it "returns a document_id" do
-        expect(connector.create_id_reservation).to eq(document_id)
+        expect(response['document_id']).to eq(document_id)
+      end
+
+      it "returns the enable status" do
+        expect(response['enabled']).to eq(true)
       end
     end
 
@@ -34,6 +40,37 @@ RSpec.describe DocstoreConnector, :type => :model do
 
       it "raises an error" do
         expect {subject.create_id_reservation}.to raise_error(Faraday::ClientError)
+      end
+    end
+  end
+
+  describe "disable_id_reservation" do
+    context "with a status: 200 response from docstore" do
+      before do
+        stub_request(:put, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations/#{document_id}")
+          .with(headers: {'X-Request-Id' => request_id})
+          .to_return(body: { 'document_id' => document_id, enabled: false }.to_json)
+      end
+
+      let(:response) { connector.disable_id_reservation(document_id) }
+
+      it "returns a document_id" do
+        expect(response['document_id']).to eq(document_id)
+      end
+
+      it "returns the enable status" do
+        expect(response['enabled']).to eq(false)
+      end
+    end
+
+    context "with a non-200 response" do
+      before do
+        stub_request(:put, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations/#{document_id}")
+          .to_return(status: 500)
+      end
+
+      it "raises an error" do
+        expect {subject.disable_id_reservation(document_id)}.to raise_error(Faraday::ClientError)
       end
     end
   end

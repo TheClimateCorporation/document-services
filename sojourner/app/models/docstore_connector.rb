@@ -9,7 +9,12 @@ class DocstoreConnector
 
   def create_id_reservation
     response = connection.post('id_reservations')
-    response.body['document_id']
+    response.body.slice('document_id', 'enabled')
+  end
+
+  def disable_id_reservation(document_id)
+    response = connection.put "id_reservations/#{document_id}"
+    response.body.slice('document_id', 'enabled')
   end
 
   def store_document(attrs)
@@ -30,10 +35,6 @@ class DocstoreConnector
     connection.post 'documents', payload do |request|
       # TODO: Remove when ready to refuse all non-authenticated traffic
     end
-  end
-
-  def disable_id_reservation(document_id)
-    connection.put "id_reservations/#{document_id}"
   end
 
   private

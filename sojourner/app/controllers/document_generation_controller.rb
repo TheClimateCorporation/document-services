@@ -50,7 +50,7 @@ class DocumentGenerationController < ApplicationController
     ).merge(
       created_by: current_user_id,
       request_id: request.uuid,
-      document_id: docstore_connector.create_id_reservation
+      document_id: docstore_connector.create_id_reservation['document_id']
     )
   end
 

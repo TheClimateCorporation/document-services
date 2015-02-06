@@ -4,6 +4,7 @@ RSpec.describe "Document Generation Requests", type: :request do
   subject { response }
 
   before { request_as 'me' }
+  let(:document_id) { 'a-document-id' }
 
   describe "POST /generate" do
     context "with valid params" do
@@ -12,9 +13,9 @@ RSpec.describe "Document Generation Requests", type: :request do
 
       before do
         stub_request(:post, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations")
-          .to_return(body: {'document_id' => 'document_id'}.to_json, :status => 200)
+          .to_return(body: {'document_id' => document_id}.to_json, :status => 200)
         stub_request(:post, "#{DocstoreConnector::DOCSTORE_URL}/documents")
-          .to_return(body: {'document_id' => 'document_id'}.to_json, :status => 200)
+          .to_return(body: {'document_id' => document_id}.to_json, :status => 200)
         stub_request(:post, "http://message-bus.net/messages")
 
         post '/generate', template_id: template_single_version.template.id,
@@ -28,9 +29,10 @@ RSpec.describe "Document Generation Requests", type: :request do
     context "with invalid params" do
       before do
         stub_request(:post, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations")
-          .to_return(:body => {'document_id' => 'document_id'}.to_json)
+          .to_return(:body => {'document_id' => document_id}.to_json)
 
-        stub_request(:put, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations")
+        stub_request(:put, "#{DocstoreConnector::DOCSTORE_URL}/id_reservations/#{document_id}")
+          .to_return(body: {'document_id' => document_id, 'enabled' => false}.to_json, status: 200)
 
         post '/generate'
       end
