@@ -21,19 +21,6 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
-  config.before(:each, :type => :controller) do
-    controller.request.headers['X-Authenticated-User-Id'] = "1337"
-    controller.request.headers['Authorization'] = 'Bearer 988f2fb4-5c83-4979-89cf-6df35a99614d'
-
-    stub_request(:any, "https://qa1-twi.climate.com/api/auth/oauth/tokens/readAccessToken")
-      .to_return(:status => 200,
-                 :body => {
-                   "access_token"=> '988f2fb4-5c83-4979-89cf-6df35a99614d',
-                   "user"=> { "id"=> 1337 }
-                  }.to_json,
-                  :headers => {})
-  end
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
