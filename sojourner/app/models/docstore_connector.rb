@@ -33,7 +33,7 @@ class DocstoreConnector
   end
 
   def disable_id_reservation(document_id)
-    connection.put 'id_reservations', { document_id: document_id }
+    connection.put "id_reservations/#{document_id}"
   end
 
   private
