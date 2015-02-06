@@ -7,25 +7,25 @@
         "first-name": "Eric",
         "last-name": "Gliver",
         "phone": "555-765-1234",
-        "email": "tester123@climate.com"
+        "email": "something@example.com"
       },
       {
         "first-name": "Dave",
         "last-name": "Barker",
         "phone": "555-123-5432",
-        "email": "thinkbig182@climate.com"
+        "email": "something2@example.com"
       },
       {
         "first-name": "Matthew",
         "last-name": "Kerrang",
         "phone": "555-555-3123",
-        "email": "light432@climate.com"
+        "email": "something3@example.com"
       },
       {
         "first-name": "John",
         "last-name": "Doe",
         "phone": "555-456-1234",
-        "email": "kerrang123@climate.com"
+        "email": "something4@example.com"
       }
     ]
   }
