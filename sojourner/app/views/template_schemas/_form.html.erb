@@ -1,0 +1,20 @@
+<%= form_for(@template_schema) do |f| %>
+  <%= render partial: "shared/form_errors", locals: {record: @template_schema} %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :json_schema_properties %>
+    <%= f.text_area :json_schema_properties, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :json_stub %>
+    <%= f.text_area :json_stub, class: 'form-control' %>
+  </div>
+
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>

@@ -1,0 +1,27 @@
+<h1>Templates</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Type</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @templates.each do |template| %>
+      <tr>
+        <td><%= template.id %></td>
+        <td><%= template.name %></td>
+        <td><%= template.type %></td>
+        <td><%= link_to 'Show', template_path(template) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to 'Create a template', [:new, :template], class: 'btn btn-primary' %>
+</p>

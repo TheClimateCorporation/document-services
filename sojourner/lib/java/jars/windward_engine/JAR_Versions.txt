@@ -1,0 +1,42 @@
+Pulled from Zendesk article.  For the most current version number check here:
+
+http://helpdesk.windwardreports.com/entries/87717-jar-files-required-by-windward-reports-java-engine
+
+WARNING: Do not download the jar files directly from the source - use the ones provided. Many times there are different jars for a given project that all have the same version number. Those other silent versions can cause problems .
+In the \lib directory there are the following JAR files and you MUST use those files as the exact versions are those that Windward expects.   
+
+The JAR files required are as follows:  
+
+JAR Filename             Description                              Version  
+
+WindwardReports.jar 	 Windward Engine (not for Android)        {Windward version}
+WindwardCustomFunctions.jar	Sample custom macros                  {Windward version}
+
+bcmail-jdk14-138.jar     encryption for iText                     1.38.0
+bcprov-jdk14-138.jar     encryption for iText                     1.38.0
+bctsp-jdk14-138.jar      encryption for iText                     1.38.0
+ChartDirector.jar        charting library                         5.1
+Commons-codec.jar        used for uuencode & uudecodeing          1.3 
+commons-lang-2.6.jar     used by jfreechart                       2.6
+dom4j-1.6.1.jar          XML handling - SAX and DOM               1.6.1 
+iText-2.1.7.jar          PDF generation                           2.1.7 
+iTextAsian.jar           PDF generation using Asian fonts         1.0 (has been the same forever) 
+itext-hyph-xml.jar       hyphenation (for all output formats)     1.0 (has been the same forever) 
+jaxen.jar                XPath processing for dom4j               1.1.1 
+jcommon.jar              used for gauges                          1.0.13
+jfreechart.jar           used for gauges                          1.0.13 
+json-path-0.8.0.jar      json query library                       0.8.0
+log4j.jar                Logging program                          1.2.12 
+mongo-java-driver-2.11.1.jar   MomgoDB query library              2.11.1
+mscorlib.jar             stubs to match IKVM (.net engine)        {Windward version}
+odata4j-0.7.0-clientbundle.jar  OData client					  0.7.0
+poi.jar                  XLS output                               3.9
+relaxngDatatype.jar      Datatyping for XPath results             no version provided
+xsdlib.jar               Datatyping for XPath results             no version provided
+woodstox-core-asl-4.2.0.jar	Used to write XML output (including OfficeXML)	4.2.0
+stax2-api-3.1.1.jar		 Used to write XML output (including OfficeXML)		3.1.1
+
+
+Android only:
+WindwardAndroid.jar 	 Windward Engine (for Android only)       {Windward version}
+droidText.0.4.jar        iText for Android						  0.4

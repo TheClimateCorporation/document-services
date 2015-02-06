@@ -1,0 +1,109 @@
+<h1>Template <%=@template_version.template.id %>: Version <%= @template_version.version %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Created by</th>
+      <th>Created at</th>
+      <th>Parent Template</th>
+      <th>Enabled in production?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @template_version.created_by %></td>
+      <td><%= @template_version.created_at.to_formatted_s %></td>
+      <td><%= link_to @template_version.template.name, template_path(@template_version.template) %></td>
+      <!-- TODO: make ready_for_production on this page a toggle button -->
+      <td><%= @template_version.ready_for_production? %></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Template file:</div>
+  <div class="panel-body"><%= link_to @template_version.file_location.key, @template_version.file_location.read_link %> </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Sample Document:</div>
+  <div class="panel-body">
+    <% if @template_version.sample_document %>
+      <%= link_to "template_#{@template.id}_version_#{@template_version.version}_SAMPLE.pdf", @template_version.sample_document.read_link, target: "_blank" %>
+    <% else %>
+      <%= link_to('Generate Sample', template_version_sample_document_path(
+                    template_id: @template_version.template_id,
+                    version_version: @template_version.version),
+                    class: 'btn btn-primary',
+                    method: :post) %>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel-group" role="tablist">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="template-schema">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse-schema">
+          <span style="text-decoration:underline;">
+            JSON Schema for validating input_data for a request with this template_version
+          </span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapse-schema" class="panel-collapse collapse" role="tabpanel">
+      <div class="panel-body">
+        <pre><%= beautify_json(@template_version.template_schema.json_schema) %></pre>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="json-stub">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-stub">
+          <span style="text-decoration:underline;">
+            Example JSON stub for POSTing a request with this template version
+          </span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapse-stub" class="panel-collapse collapse in" role="tabpanel">
+      <div class="panel-body">
+        <pre><%= beautify_json(@template_version.template_schema.json_stub) %></pre>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="permissions">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse-permissions">
+          <span style="text-decoration:underline;">
+            Permissions History
+          </span>
+        </a>
+      </h4>
+    </div>
+    <div id="collapse-permissions" class="panel-collapse collapse" role="tabpanel">
+      <div class="panel-body">
+        <table class="table" id='permission-changes'>
+          <thead>
+            <tr>
+              <th>Ready_for_production?</th>
+              <th>Created By</th>
+              <th>Created at</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @template_version.permission_changes.reverse.each_with_index do |permission_change, idx| %>
+            <tr>
+              <td ><%= permission_change.ready_for_production %></td>
+              <td><%= permission_change.created_by %></td>
+              <td><%= permission_change.created_at %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

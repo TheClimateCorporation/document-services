@@ -1,0 +1,19 @@
+defaults: &defaults
+  encoding: utf8
+  adapter: mysql2
+  username: <%= DotProperties.fetch('simone.mysql_username') { nil } %>
+  password: <%= DotProperties.fetch('simone.mysql_password') { nil } %>
+  collation: utf8_general_ci
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *defaults
+  database: simone_development
+
+test:
+  <<: *defaults
+  database: simone_test
+
+production:
+  <<: *defaults

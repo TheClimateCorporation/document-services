@@ -1,0 +1,7 @@
+defaults: &defaults
+  exchange: "demo" # CHANGE-ME if you do anything with this
+
+test:
+  <<: *defaults
+  uri: http://message-bus.net
+

@@ -1,0 +1,55 @@
+<% if notice %>
+  <br><p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<h1><%= @template_schema.name %></h1>
+
+<% if @template_schema.immutable? %>
+  <p>
+    This schema has been used by a template already, and cannot be edited or altered.
+  </p>
+  <p>
+    You can still use it for new templates, if you don't need to change it.
+    (It will show up in the drop-down when you create a new template version.)
+  </p>
+  <p>
+  Or, you can clone it and edit the copy.
+<% else %>
+  <p>
+  <%= link_to('Edit', [:edit, @template_schema], class: 'btn btn-primary') %>
+<% end %>
+
+<%= link_to('Clone', clone_template_schema_path(@template_schema),
+            class: 'btn btn-primary') %>
+</p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Json schema:</div>
+  <div class="panel-body">
+    <pre><%= beautify_json(@template_schema.json_schema) %></pre>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Json stub:</div>
+  <div class="panel-body">
+    <pre><%= beautify_json(@template_schema.json_stub) %></pre>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Created by:</div>
+  <div class="panel-body"><%= @template_schema.created_by %></div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Created at:</div>
+  <div class="panel-body"><%= @template_schema.created_at.to_formatted_s %></div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Updated at:</div>
+  <div class="panel-body"><%= @template_schema.updated_at.to_formatted_s %></div>
+</div>
+
+<%= link_to 'Back', :template_schemas %>

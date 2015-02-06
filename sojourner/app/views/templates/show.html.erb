@@ -1,0 +1,70 @@
+<% if notice %>
+  <br><p class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<h1><%= @template.name %></h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Created by:</div>
+  <div class="panel-body"><%= @template.created_by %></div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Created at:</div>
+  <div class="panel-body"><%= @template.created_at.to_formatted_s %></div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Updated at:</div>
+  <div class="panel-body"><%= @template.updated_at.to_formatted_s %></div>
+</div>
+
+<h3>Versions</h3>
+<% if @template.versions.exists? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Version</th>
+        <th>Created by</th>
+        <th>Created at</th>
+        <th>Using Schema</th>
+        <th>Enabled in Production</th>
+        <th></th><th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @template.versions.each do |template_version| %>
+        <tr>
+          <td><%= link_to "Version #{template_version.version}", template_version_path(@template, template_version.version)  %></td>
+          <td><%= template_version.created_by %></td>
+          <td><%= template_version.created_at.to_formatted_s %></td>
+
+          <td><%= link_to "#{template_version.template_schema.id}", template_schema_path(template_version.template_schema) %></td>
+
+          <td><%= template_version.ready_for_production? %></td>
+
+          <td><%= link_to('enable', template_version_permissions_path(
+                    @template, template_version.version, ready_for_production: true),
+                    class: 'btn btn-primary',
+                    method: :post,
+                    data: { confirm: 'Are you sure?' }) if !template_version.ready_for_production? %></td>
+
+          <td><%= link_to('disable', template_version_permissions_path(
+                    @template, template_version.version, ready_for_production: false),
+                    class: 'btn btn-primary',
+                    method: :post,
+                    data: { confirm: 'Are you sure?' }) if template_version.ready_for_production? %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>This template doesn't have any versions.</p>
+<% end %>
+
+<p>
+  <%= link_to 'Create a version', new_template_version_path(@template), class: 'btn btn-primary' %>
+</p>
+
+<br>
+<p><%= link_to 'Back', :templates %></p>

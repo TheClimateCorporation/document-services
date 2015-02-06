@@ -1,0 +1,19 @@
+<h1>New template single version</h1>
+
+<%= form_for(@template_version, as: :template_version, url: template_versions_path(@template)) do |f| %>
+  <%= render partial: "shared/form_errors", locals: {record: @template_version} %>
+
+  <div class="form-group">
+    <%= f.label :template_schema_id %><br>
+    <%= f.select :template_schema_id, @template_schemas.map { |ts| [ts.name, ts.id] }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :file %>
+    <%= f.file_field :file %>
+  </div>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
+
+<br>
+<p><%= link_to 'Back', template_path(@template) %></p>

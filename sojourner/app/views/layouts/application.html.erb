@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sojourner</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container">
+  <% if flash[:alert] %>
+    <br>
+    <div class="row">
+      <div class="alert alert-danger">
+        <%= flash[:alert] %>
+        <a class="close" data-dismiss="alert">&#215;</a>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- CHANGE-ME so that I only show up when logged in-->
+    <ul class="nav navbar-nav navbar-right">
+      <li><%= link_to "Templates", templates_path %></li>
+      <li><%= link_to "JSON Schemas", template_schemas_path %></li>
+      <li><%= link_to "Log Out", root_path, data: { confirm: 'CHANGE-ME to a real logout link' } %></li>
+    </ul>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= yield %>
+    </div>
+  </div>
+</div>
+</body>
+</html>
