@@ -20,8 +20,5 @@ Rails.application.routes.draw do
     match '/' => 'ok_computer#index', via: [:get, :options]
   end
 
-  resources :swagger, only: :index
-  resources :swagger_resources, only: :show, path: '/swagger/resources'
-
   root to: 'templates#index'
 end

@@ -31,7 +31,6 @@ class S3Document < Document
     self.uri ||= "#{DEFAULT_BUCKET_NAME}/#{DEFAULT_PREFIX_BASE}/#{document_id}/#{name}#{file_extension}"
   end
 
-  # eg "com.climate.production.services"
   def bucket_name
     @bucket_name ||= uri.split('/',2)[0]
   end

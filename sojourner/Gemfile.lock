@@ -182,9 +182,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
-    swagger-docs (0.1.9)
-      activesupport (>= 3, < 5)
-      rails (>= 3, < 5)
     therubyrhino (2.0.4)
       therubyrhino_jar (>= 1.7.3)
     therubyrhino_jar (1.7.4)
@@ -240,7 +237,6 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   shoulda-matchers
   spring
-  swagger-docs
   therubyracer
   therubyrhino
   turbolinks

@@ -32,10 +32,6 @@ gem 'sdoc', '~> 0.4.0',                              group: :doc
 # gem 'capistrano-rails', group: :development
 
 
-gem "warbler"
-gem "okcomputer"
-gem "lograge"
-gem "swagger-docs"
 group :development, :test do
   gem "rspec-rails", "~> 3.0.0"
   gem 'shoulda-matchers'
@@ -50,3 +46,7 @@ end
 
 gem 'aws-sdk'
 gem 'dot_properties'
+gem "lograge"
+gem "okcomputer"
+gem "warbler"
+

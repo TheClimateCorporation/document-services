@@ -1,25 +1,8 @@
 class DocumentGenerationController < ApplicationController
-  swagger_controller :document_generation, "Document generator"
-
   protect_from_forgery with: :null_session
 
   before_filter do
     render text: "Not authorized", status: :unauthorized unless current_user_id
-  end
-
-  swagger_api :generate do
-    summary "Generate a document from a template and store it in docstore"
-    param :form, :template_id, :integer, :required, "Template ID"
-    param :form, :version_specified, :integer, :optional, "Template version to use"
-    param :form, :schema_id, :integer, :required, "Schema ID"
-    param :form, :input_data, :string, :required, "JSON serialized input data"
-    param :form, :document_name, :string, :required, "Document name"
-    param :form, :document_owner_id, :string, :optional, "Document owner ID"
-    param :form, :document_owner_type, :string, :optional, "Document owner type"
-    param :form, :publisher_key, :string, :optional, "Routing key to publish to the message buss"
-    param :form, :as_production, :boolean, :optional, "Determine template version as in prod server"
-    response :ok
-    response :unprocessable_entity
   end
 
   def generate

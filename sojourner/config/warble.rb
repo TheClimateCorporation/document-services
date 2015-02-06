@@ -14,7 +14,7 @@ Warbler::Config.new do |config|
   # config.dirs = %w(app config db lib log script vendor tmp spec/fixtures)
 
   # Additional files/directories to include, above those in config.dirs
-  config.includes = FileList['config.ru', 'Rakefile', 'swagger_resources/**/*']
+  config.includes = FileList['config.ru', 'Rakefile']
 
   # Additional files/directories to exclude
   # config.excludes = FileList["db"]
