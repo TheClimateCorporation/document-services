@@ -80,14 +80,15 @@ Now that you have a template, you are ready to generate a document! The fastest 
 
 To generate a document that will get sent on to Simone/your choice of doc store, I reccomend the Postman chrome app. At any rate, you will want to POST a request to `http://localhost:3001/generate` with the Content-Type header set to 'application/json', and the body like so:
 
-`{
+```
+{
 	"document_name": "having_so_much_fun_testing_document_generation_with_sojourner!",
-    "template_id": "1",
-    "schema_id": "1",
-    "document_owner_type": "anyone",
+  "template_id": "1",
+  "schema_id": "1",
+  "document_owner_type": "anyone",
 	"input_data": "{\"quote\":{\"quote-type\":\"MP\",\"quote-date\":\"today\",\"customers\":[{\"first-name\":\"Bob\",\"last-name\":\"Barker\",\"phone\":\"555-123-5432\",\"email\":\"whatdidiwinbob@jeapordy.com\"}]}}"
-}`
-
+}
+```
 
 * the owner type of 'anyone' is to retrieve the link with minimal fuss. setting owner type of 'user' (or leaving it blank will default to user) will trigger authorization checking based on current_user_id, which is stubbed as a timestamp, so good luck with that.
 * There is no version number. This is on purpose. Sojourner will use the highest version of the template that corresponds to the schema you specify.
@@ -105,7 +106,6 @@ This is not yet a document! Unless you've turned off queueing, return to your co
 Go get it from [Simone](https://github.com/TheClimateCorporation/document-services/tree/master/simone). :)
 
 See "Retrieving document read links".
-
 
 
 
