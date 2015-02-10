@@ -79,24 +79,24 @@ Now it says enabled: false, and no one else can use that document_id.
 Make a POST request to `/documents` containing `document_attributes` and `document_contents`.
 
 ```
-curl --form document_attributes="{\"created_by\":\"me\",\"owner_id\":\"anyone\",\"owner_type\":\"anyone\",\"notes\":\"my sweet doc for testing Simone\"}" --form document_content=@spec/fixtures/empty.pdf http://localhost:3000/documents
+curl --form 'document_attributes[owner_type]=anyone' --form document_content=@spec/fixtures/empty.pdf http://localhost:3000/document
 
 ```
 
 ```
-{"id":6,"document_id":"be29d6e7-d05e-465b-b9a8-a49674d47995","created_by":"DEMO USER at 12:20:09 pm 02/10/15","owner_id":"DEMO USER at 12:20:09 pm 02/10/15","owner_type":"User","size_bytes":null,"content_hash":null,"uri":"/Users/caustin/dev/open_source_projects/document-services/simone/public/documents/be29d6e7-d05e-465b-b9a8-a49674d47995/empty.pdf.ttf","name":"empty.pdf","mime_type":"application/octet-stream","notes":null,"created_at":"2015-02-10T20:20:09.932Z","updated_at":"2015-02-10T20:20:09.932Z"}
+{"id":19,"document_id":"ca222fb2-c998-498b-b489-4be1d8efc9e8","created_by":"DEMO USER at 12:47:40 pm 02/10/15","owner_id":"DEMO USER at 12:47:40 pm 02/10/15","owner_type":"anyone","size_bytes":null,"content_hash":null,"uri":"/Users/caustin/dev/open_source_projects/document-services/simone/public/documents/ca222fb2-c998-498b-b489-4be1d8efc9e8/empty.pdf.ttf","name":"empty.pdf","mime_type":"application/octet-stream","notes":null,"created_at":"2015-02-10T20:47:40.923Z","updated_at":"2015-02-10T20:47:40.923Z"}
 ```
 
 #### Retrieving an expiring read_link to a Document
 
 ```
-echo -e `curl -d "document_ids[]=be29d6e7-d05e-465b-b9a8-a49674d47995" http://localhost:3000/document_links`
+echo -e `curl -d "document_ids[]=ca222fb2-c998-498b-b489-4be1d8efc9e8" http://localhost:3000/document_links`
 ```
 
 in return:
 
 ```
-[{"document_id":"be29d6e7-d05e-465b-b9a8-a49674d47995","read_link":"documents/be29d6e7-d05e-465b-b9a8-a49674d47995/empty.pdf.pdf","status":"success"}]
+[{"document_id":"ca222fb2-c998-498b-b489-4be1d8efc9e8","read_link":"documents/ca222fb2-c998-498b-b489-4be1d8efc9e8/empty.pdf.ttf","status":"success"}]
 ```
 
 
