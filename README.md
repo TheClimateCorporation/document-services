@@ -16,7 +16,7 @@ The use case that prompted us here at The Climate Corporation to build this solu
 
 Why does *this* exist?
 -----------
-When it came time to decide what software to use to meet the needs of our growning insurance platform, we didn't find anything that met all of those needs. We had a couple of previous iterations of document generation services and decided to decouple document generation from document access, so we built two services. #independentlyscalable
+When it came time to decide what software to use to meet the needs of our growing insurance platform, we didn't find anything that met all of those needs. We had a couple of previous iterations of document generation services and decided to decouple document generation from document access, so we built two services. #independentlyscalable
 
 
 How do I use it?

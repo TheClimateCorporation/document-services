@@ -100,7 +100,7 @@ This is not yet a document! Unless you've turned off queueing, return to your co
 
 Simone says... come get your document!
 
-See "[Retrieving an expiring read_link to a Document](https://github.com/TheClimateCorporation/document-services/tree/master/simone#retrieving-an-expiring-read_link-to-a-document)".
+See "[Retrieving a read_link to a Document](https://github.com/TheClimateCorporation/document-services/tree/master/simone#retrieving-a-read_link-to-a-document)".
 
 
 
@@ -133,7 +133,7 @@ It allow the return of informative errors for generation requests containing ins
 ### TemplateSingleVersion
  * storable (template file)
 
- Note about "Enabled in Production": You will notice that it says 'false' under "Enabled in Production" for your new template version. It will still work in the development and test evironments. If you'd like to enable it, do so! You can see the history of permission changes on a template version by clicking through to its own #show page.
+ Note about "Enabled in Production": You will notice on the `TemplateSingle#show` page where it lists the versions of your template, that it says 'false' under "Enabled in Production" for your new template version. It will still work in the development and test evironments. If you'd like to enable it, do so by clicking the 'Enable' button. You can see the history of permission changes on a template version by clicking through to its own #show page.
 
  Note about future templates: You can use the same `TemplateSchema` for multiple template versions, if you need exactly the same information. But you cannot edit a schema once it is attached to any template. If you'd like to build off of the schema(s) you already made, hit `clone` on the schema of your desiring.
 

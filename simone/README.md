@@ -99,7 +99,10 @@ And in return see something like:
 {"id":27,"document_id":"76be4ed7-e1c1-420c-aae6-fdd2632af731","created_by":"DEMO USER at 16:26:09 pm 02/10/15","owner_id":"anyone","owner_type":"anyone","size_bytes":null,"content_hash":null,"uri":"/Users/caustin/dev/open_source_projects/document-services/simone/public/documents/76be4ed7-e1c1-420c-aae6-fdd2632af731/empty.pdf.ttf","name":"empty.pdf","mime_type":"application/octet-stream","notes":null,"created_at":"2015-02-11T00:26:09.979Z","updated_at":"2015-02-11T00:26:09.979Z"}
 ```
 
-#### Retrieving an expiring read_link to a Document
+#### Retrieving a read_link to a Document
+**S3Document:** The read_link will expire in one hour.
+**LocalDocument:** The read_link will reference a fixed location in the app's public folder, and will not expire.
+____________________________________________
 
 Document `read_link` creation is always treated as a batch, and the param name is plural.
 
@@ -114,7 +117,8 @@ In return you will see something like:
 ```
 [
   {
-    "document_id":"ca222fb2-c998-498b-b489-4be1d8efc9e8",    "read_link":"documents/ca222fb2-c998-498b-b489-4be1d8efc9e8/empty.pdf.ttf",
+    "document_id":"ca222fb2-c998-498b-b489-4be1d8efc9e8",
+    "read_link":"documents/ca222fb2-c998-498b-b489-4be1d8efc9e8/empty.pdf.ttf",
     "status":"success"
   },
   {
