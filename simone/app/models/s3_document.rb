@@ -26,7 +26,7 @@ class S3Document < Document
   private
 
   #URI for s3 objects in the format eg:
-  # com.climate.<env>.services/simone/documents/<document_id>
+  # bucket.name.with.dots/simone/documents/<document_id>
   def set_uri
     self.uri ||= "#{DEFAULT_BUCKET_NAME}/#{DEFAULT_PREFIX_BASE}/#{document_id}/#{name}#{file_extension}"
   end
