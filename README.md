@@ -21,6 +21,4 @@ When it came time to decide what software to use to meet the needs of our growin
 
 How do I use it?
 -----------
-You can use one or both applications. Give the (Demo Applications) a try, clone the repo, choose your template rendering engine and your storage back end(s).
-
-
+You can use one or both applications. Clone the repo, and follow the instructions in the [Sojourner](https://github.com/TheClimateCorporation/document-services/tree/master/sojourner) and [Simone](https://github.com/TheClimateCorporation/document-services/tree/master/simone) README's to get started.
