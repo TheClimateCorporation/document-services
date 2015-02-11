@@ -12,7 +12,7 @@ Simone is designed to work with an ansynchronous document generation service ([S
 * An election for your authorization scheme.
   * In this example, documents with owner type 'anyone', it will return a read link to any requestor.
   * In this example, documents with owner type 'user', it will restrict retrieval links to the `current_user_id` that matches the document's `created_by` or `owner_id`.
-  * You can use whatever you want by changing the `DocuemntAuthorizor.authorized?` method.
+  * You can use whatever you want by changing the `DocumentAuthorizor.authorized?` method.
 
 * A storage election for your documents
   * This example uses local disk storage in the development environment. (`LocalDocument`)
