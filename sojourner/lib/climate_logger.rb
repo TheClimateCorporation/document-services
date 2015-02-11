@@ -1,12 +1,12 @@
-# ClimateLogger is simply a wrapper around the Logger
+# CustomLogger is simply a wrapper around the Logger
 # It supports all Logger methods
 # Using this wrapper allows us to overload method calls to Logger
-class ClimateLogger < DelegateClass(Logger)
+class CustomLogger < DelegateClass(Logger)
 
   # @param file_path [String, IO] defaults to STDOUT
   def initialize(file_path = STDOUT)
     logger = Logger.new(file_path)
-    logger.formatter = ClimateLogger::Formatter.new
+    logger.formatter = CustomLogger::Formatter.new
     super(logger)
   end
 

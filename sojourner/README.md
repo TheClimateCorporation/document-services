@@ -22,19 +22,9 @@ Sojourner is a rails application for doing these things.
   * You can send the documents elsewhere or elect to store them within Sojourner by altering the `DocstoreConnector`.
 
 
-## Using the application
+## Getting started
 
 To get started most quickly, use Sojourner and Simone (both applications in this repo) together. Setup instructions will assume you are doing this.
-
-#### A note on 'Templates'
-
-A `Template` is the object which all of the versions of the template will `belong_to`, and the object whose ID clients will use to call for a document to be made.
-
-A `Template` can either be a `TemplateSingle`, for which each version will have its own template file, or a `TemplateBundle`, which is an ordered set of `TemplateSingleVersion`s.
-
-Right now only `TemplateSingle`s are supported, but the Windward library supports both. A bundle, for example, might be used for attaching a standardized cover page or legal disclaimer to each of several other templates.
-
-### Getting started
 
 Clone the repo. In the root directory of the repo, add a `doc-services.properties` text file. This is from where you will fetch anything you don't want to commit to the repo.
 
@@ -60,7 +50,12 @@ Once running `rspec` for either app does not cause any unhappy red text, start t
 
 Go time!
 
+## Using the application
+
 #### Creating a template
+
+_NB: A `Template` is the object which all of the versions of the template will `belong_to`, and the object whose ID clients will use to call for a document to be made. A `Template` object does not itself have files. The template files reside with each version of the template (`TemplateSingleVersion` objects.)_
+
 
 Navigate to http://localhost:3001. (If necessary, sign in.) Click the "Create a template" button and add a name for a new template. This creates the object to group the versions under.
 
@@ -103,10 +98,9 @@ This is not yet a document! Unless you've turned off queueing, return to your co
 
 ### Getting your document once it's generated
 
-Go get it from [Simone](https://github.com/TheClimateCorporation/document-services/tree/master/simone). :)
+Simone says... come get your document!
 
-See "Retrieving document read links".
-
+See "[Retrieving an expiring read_link to a Document](https://github.com/TheClimateCorporation/document-services/tree/master/simone#retrieving-an-expiring-read_link-to-a-document)".
 
 
 
@@ -114,13 +108,30 @@ See "Retrieving document read links".
 
 ### Template
 
+A `Template` is the object which all of the versions of the template will `belong_to`, and the object whose ID clients will use to call for a document to be made.
+
+By design, `Template` can either be a `TemplateSingle`, for which each version will have its own template file, or a `TemplateBundle`, which is an ordered set of `TemplateSingleVersion`s.
+
+Right now only `TemplateSingle`s are supported, but the Windward library supports both. A bundle, for example, might be used for attaching a standardized cover page or legal disclaimer to each of several other templates.
+
+`Template` is structured to support both types so that clients do not need to know what 'kind' of template they are asking for, and users who wish to make a simple single template do not need to assemble a single-item 'bundle' to do so.
+
 ##### TemplateSingle
+
+This kind of template `has_many` `TemplateSingleVersion` objects, each of which has its own template file.
+
 ##### TemplateBundle
+
+_Not yet implemented_ This kind of template will have versions which are ordered sets of TemplateSingleVersions.
 
 ### TemplateSchema
 
+The `TemplateSchema` is the answer to the question "What information is required to fill out this template?" (json_schema_properties) and also "What would valid input_data for a generation request look like?" (json_stub)
+
+It allow the return of informative errors for generation requests containing insufficient or malformed input_data, and it also allows the population of a `sample_document` for each `TemplateSingleVersion`
+
 ### TemplateSingleVersion
- * storable
+ * storable (template file)
 
  Note about "Enabled in Production": You will notice that it says 'false' under "Enabled in Production" for your new template version. It will still work in the development and test evironments. If you'd like to enable it, do so! You can see the history of permission changes on a template version by clicking through to its own #show page.
 
@@ -128,27 +139,44 @@ See "Retrieving document read links".
 
 ### TemplatePermissionChange
 
+  `TemplatePermissionChange`s are the record of when a template was or was not authorized to be used to generate documents in the production environment.
+
+  This allows the use and verification of templates in the development and test environments before approving them for use in the production environment.
+
+  It also allows the revokation of authorization for template versions which you no longer wish to be used.
+
+  `TemplatePermissionChange` also tracks *who* changed the template permissions.
+
 ### SampleDocument
-  * storable
+  * storable (pdf)
+
+  A `SampleDocument` is an example of what a document generated with a given template would look like. It is generated with the `json_stub` of the `TemplateSchema` that the `TemplateSingleVersion` belongs to.
 
 ### StorageLocation
 
+  A `StorageLocation` is the object responsible for storing something that belongs to another object. The StorageLocation is in charge of knowing how to save and retrieve the storable from wherever it is stored.
+
 ##### LocalStorageLocation
+
+  Uses local disk storage. Default for the development environment.
+
 ##### S3Location
+
+  Uses Amazon S3 storage. Default for the production environment.
+
 ##### NullLocation
+
+  Doesn't actually store anything, but returns valid responses for the storage and retrieval messages. Default for the test environment.
 
 
 ### GenerationMetadata
- * storable
+ * storable (input_data)
+
+  `GenerationMetadata` persists all of the information on a document generation request that would be neccesary to recreate the document.
 
 
 
-## Other Models
 
-### DocstoreConnector
-### DocumentProcessor
-### DocumentGenerationJob
-### MessageBus
 
 
 

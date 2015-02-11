@@ -85,7 +85,7 @@ Rails.application.configure do
 
   # Use a custom logger
   logger = ActiveSupport::TaggedLogging.new(
-    ClimateLogger.new
+    CustomLogger.new
   )
   logger.level = Logger::INFO
   config.logger = logger

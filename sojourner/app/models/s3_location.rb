@@ -24,8 +24,8 @@ class S3Location < StorageLocation
   private
 
   #URI for s3 objects in the format eg:
-  # com.climate.<env>.services/sojourner/templates/TemplateSingleVersion_1.docx
-  # com.climate.<env>.services/sojourner/input_data/GenerationMetadata_1.json
+  # bucket.name.with.dots/sojourner/templates/TemplateSingleVersion_1.docx
+  # bucket.name.with.dots/sojourner/input_data/GenerationMetadata_1.json
   def set_uri
     self.uri ||= "#{DEFAULT_BUCKET_NAME}/#{DEFAULT_PREFIX_BASE}/#{storable.key_prefix}/#{key}"
   end

@@ -36,7 +36,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Use a custom logger
-  logger = ActiveSupport::TaggedLogging.new(ClimateLogger.new)
+  logger = ActiveSupport::TaggedLogging.new(CustomLogger.new)
   logger.level = Logger::INFO
   config.logger = logger
 
